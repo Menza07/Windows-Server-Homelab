@@ -74,6 +74,8 @@ A fully functional Windows Server domain environment built for learning and prac
 
 ## PowerShell Scripts
 
+Basic learning scripts created while building the lab:
+
 - New-HomelabUser.ps1 – Create a new AD user
 - New-HomelabOU.ps1 – Create a new Organizational Unit
 - Get-HomelabStatus.ps1 – Quick lab health check
