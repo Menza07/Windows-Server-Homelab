@@ -52,6 +52,9 @@ VMware Workstation Pro 25H2
       DHCP          CompanyData        Domain Client
       GPO           Public Folder
 
+
+      
+
 | Server / Client | Role                        | IP Address       | Status   |
 |-----------------|-----------------------------|------------------|----------|
 | *DC01*        | Domain Controller, DNS, DHCP, GPO | 192.168.59.10 (Static) | ✅ Online |
