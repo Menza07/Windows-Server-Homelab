@@ -4,7 +4,7 @@ A fully functional Windows Server domain environment built for learning and prac
 
 *Platform:* VMware Workstation Pro 25H2  
 *Domain:* homelab.local  
-*Network:* 192.168.59.0/24 (VMnet8 / NAT + Homelab-Internal)
+*Network:* 192.168.59.0/24
 
 ---
 
@@ -38,119 +38,45 @@ A fully functional Windows Server domain environment built for learning and prac
 
 ## Lab Overview
 
-VMware Workstation Pro 25H2
-                          │
-                 192.168.59.0/24
-                          │
-         ┌────────────────┼────────────────┐
-         │                │                │
-         ▼                ▼                ▼
-       DC01             FS01           WIN10-01
-    192.168.59.10   192.168.59.20      DHCP
-         │                │                │
-   AD DS / DNS       File Server       Windows 10
-      DHCP          CompanyData        Domain Client
-      GPO           Public Folder
-
-
-      
-
-| Server / Client | Role                        | IP Address       | Status   |
-|-----------------|-----------------------------|------------------|----------|
-| *DC01*        | Domain Controller, DNS, DHCP, GPO | 192.168.59.10 (Static) | ✅ Online |
-| *FS01*        | File Server + Windows Server Backup | 192.168.59.20 (Static) | ✅ Online |
-| *WIN10-01*    | Domain-joined Windows 10 client | DHCP (from DC01) | ✅ Online |
+| Server / Client | Role | IP Address | Status |
+|-----------------|------|------------|--------|
+| *DC01* | Domain Controller, DNS, DHCP, GPO | 192.168.59.10 (Static) | Online |
+| *FS01* | File Server + Windows Server Backup | 192.168.59.20 (Static) | Online |
+| *WIN10-01* | Domain-joined Windows 10 client | DHCP | Online |
 
 ---
 
 ## What This Lab Demonstrates
 
-- ✅ New Active Directory Forest & Domain (homelab.local)
-- ✅ DNS integration with Active Directory
-- ✅ DHCP server configuration & troubleshooting
-- ✅ Organizational Units, Users, Security Groups
-- ✅ Account lockout policies & password management
-- ✅ Group Policy (Command Prompt restriction + Mapped Drives)
-- ✅ File Server with SMB shares
-- ✅ NTFS + Share permissions (CompanyData / Public)
-- ✅ Mapped network drives via GPO (Z: and P:)
-- ✅ Windows Server Backup + full restore test
-- ✅ Network troubleshooting (Firewall, ICMP, APIPA, DNS)
-- ✅ Remote Desktop configuration
-
----
-
-## Current Infrastructure Summary
-
-### DC01 — Domain Controller
-- *Hostname:* DC01
-- *IP:* 192.168.59.10 / 24
-- *Gateway:* 192.168.59.2
-- *DNS:* 192.168.59.10
-- *Roles:* Active Directory Domain Services, DNS, DHCP, Group Policy Management
-- *Hardware:* 2 vCPU, 2 GB RAM, 60 GB disk
-
-### FS01 — File Server
-- *Hostname:* FS01
-- *IP:* 192.168.59.20 / 24
-- *Gateway:* 192.168.59.2
-- *DNS:* 192.168.59.10
-- *Roles:* File Server, Windows Server Backup
-- *Storage:*
-  - Disk 0 (60 GB) → OS + C:\CompanyData
-  - Disk 1 (20 GB) → E:\FS01-Backup
-- *Shares:* \\FS01\CompanyData (Public folder with Modify for Domain Users)
-
-### WIN10-01 — Domain Client
-- *Hostname:* WIN10-01
-- *IP:* DHCP from DC01
-- *Domain:* homelab.local
-- Used for GPO testing, mapped drives, and file-share access verification
+- New Active Directory Forest & Domain (homelab.local)
+- DNS and DHCP configuration
+- Organizational Units, Users and Security Groups
+- Account lockout policy
+- Group Policy (Command Prompt restriction + Mapped Drives)
+- File Server with SMB shares and NTFS permissions
+- Mapped network drives (Z: and P:)
+- Windows Server Backup + successful restore test
+- Network troubleshooting (Firewall, ICMP, APIPA)
 
 ---
 
 ## Documentation
 
-| Document | Description |
-|----------|-------------|
-| [Architecture](docs/architecture.md) | Full lab topology and IP reference |
-| [Domain Controller (DC01)](docs/dc01.md) | AD DS, DNS, DHCP, promotion details |
-| [Active Directory](docs/active-directory.md) | OUs, users, groups, lockout policy |
-| [File Server (FS01)](docs/fs01.md) | Storage, shares, NTFS permissions |
-| [Group Policy](docs/group-policy.md) | Policies and mapped drives |
-| [Backup & Recovery](docs/backup-recovery.md) | Windows Server Backup + restore test |
-| [Troubleshooting](docs/troubleshooting.md) | Network, DHCP, DNS, Firewall issues resolved |
-| [Screenshot Guide](docs/screenshots-guide.md) | Exactly which screenshots to take and where |
+- [Architecture](docs/architecture.md)
+- [Domain Controller (DC01)](docs/dc01.md)
+- [Active Directory](docs/active-directory.md)
+- [File Server (FS01)](docs/fs01.md)
+- [Group Policy](docs/group-policy.md)
+- [Backup & Recovery](docs/backup-recovery.md)
+- [Troubleshooting](docs/troubleshooting.md)
 
 ---
 
-## Skills Practised
+## PowerShell Scripts
 
-| Category              | Skills |
-|-----------------------|--------|
-| *Identity*          | AD DS, Forest/Domain creation, OUs, Users, Groups |
-| *Networking*        | Static IPs, DHCP scopes, DNS, VMware networking (VMnet8) |
-| *Security*          | Account lockout, Logon restrictions, Windows Firewall, GPO |
-| *File Services*     | SMB shares, NTFS permissions, Inheritance |
-| *Client Management* | Domain join, GPO application, Mapped drives |
-| *Backup*            | Windows Server Backup, File-level restore |
-| *Troubleshooting*   | APIPA, ICMP blocking, DNS resolution, RDP |
-
----
-
-## Repository Structure
-
----
-
-## Future Improvements
-
-- [ ] Additional Domain Controller (DC02) for redundancy
-- [ ] Print Server role
-- [ ] IIS / Web Server
-- [ ] Certificate Services (AD CS)
-- [ ] PowerShell automation scripts
-- [ ] Monitoring / logging solution
-- [ ] Additional Windows 10/11 clients
+- New-HomelabUser.ps1 – Create a new AD user
+- New-HomelabOU.ps1 – Create a new Organizational Unit
+- Get-HomelabStatus.ps1 – Quick lab health check
 
 ---
 
