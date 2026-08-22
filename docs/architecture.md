@@ -53,7 +53,6 @@
 | 127.0.0.1        | IPv4 loopback / DNS config           |
 | ::1              | IPv6 loopback                        |
 
-> **Note:** Always verify WIN10-01’s current DHCP lease before documenting a specific address.
 
 ## Core Infrastructure Summary
 
