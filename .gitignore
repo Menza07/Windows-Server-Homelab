@@ -1,0 +1,21 @@
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*~
+
+# Temporary files
+*.tmp
+*.log
+*.bak
+
+# Large binary files (add screenshots carefully)
+*.vmdk
+*.vmem
+*.vmss
+*.nvram
